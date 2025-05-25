@@ -2,11 +2,11 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Formulario de Area</h1>
+    <h1>Formulario de Apprendice</h1>
 
     <br>
 
-    <form action="{{route('Area.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('Apprendice.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
             <label for="title">Name:</label>

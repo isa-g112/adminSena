@@ -33,4 +33,36 @@ class ComputerController extends Controller
         return $computers;
 
     }
+
+    public function show($id)
+    {
+        $computer = Computer::find($id);
+
+        return view('computer.show', compact('computer'));
+    }
+
+     //Destroy
+     public function destroy (Computer $computer){
+
+        $computer->delete();
+
+        return redirect()->route('computer.index');
+    }
+
+      public function edit(Computer $computer){
+
+        return view('computer.edit',compact('computer'));
+
+      }
+
+     //Update
+    public function update(Request $request, Computer $computer){
+
+        $computer->name = $request->name;
+        $computer->save();
+
+        return redirect()->route('computer.index');
+
+      }
+
 }
