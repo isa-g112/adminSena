@@ -1,5 +1,3 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Computer;
@@ -7,62 +5,32 @@ use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
-    public function index(){
-
-        $computers = Computer::all();
-
-        return view('Computer.index', compact('computers'));
-
+    public function index()
+    {
+        return response()->json(Computer::all());
     }
 
-    public function create() {
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'number' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
+        ]);
 
-        return view('Computer.create');
+        $computer = Computer::create($validated);
 
-    }
-
-    public function store(Request $request){
-
-        $computers = new Computer();
-
-        $computers->number=$request->number;
-        $computers->brand=$request->brand;
-
-        $computers->save();
-
-        return $computers;
-
+        return response()->json($computer, 201);
     }
 
     public function show($id)
     {
         $computer = Computer::find($id);
+        if (!$computer) {
+            return response()->json(['message' => 'No encontrado'], 404);
+        }
 
-        return view('computer.show', compact('computer'));
+        return response()->json($computer);
     }
-
-     //Destroy
-     public function destroy (Computer $computer){
-
-        $computer->delete();
-
-        return redirect()->route('computer.index');
-    }
-
-      public function edit(Computer $computer){
-
-        return view('computer.edit',compact('computer'));
-
-      }
-
-     //Update
-    public function update(Request $request, Computer $computer){
-
-        $computer->name = $request->name;
-        $computer->save();
-
-        return redirect()->route('computer.index');
-
-      }
-
 }
+
+

@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Computer extends Model
 {
-    public function Aprrendice(){
+    use HasFactory;
 
-       return $this->belongsTo('App\Models\Apprendice');
+    protected $fillable = ['number', 'brand'];
+
+    public function Aprrendice()
+    {
+        return $this->belongsTo('App\Models\Apprendice');
     }
 }
-

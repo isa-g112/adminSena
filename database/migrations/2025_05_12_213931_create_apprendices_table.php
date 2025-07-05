@@ -16,7 +16,7 @@ return new class extends Migration
             $table->String('name');
             $table->String('email');
             $table->String('cell_number');
-
+            
             $table->unsignedBigInteger('course_id')->nullable();
             $table->unsignedBigInteger('computer_id')->nullable();
             //referencia tabla course

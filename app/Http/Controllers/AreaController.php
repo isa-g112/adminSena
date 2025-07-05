@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Area;
+use function Illuminate\Support\view;
 
 class AreaController extends Controller
 {
@@ -30,6 +31,9 @@ class AreaController extends Controller
         $areas->save();
 
         return $areas;
+
+     
+
 
     }
 
