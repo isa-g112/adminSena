@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\Apprentice;
 use Illuminate\Http\Request;
 
-class AreaController extends Controller
+
+class AprenticeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $areas= Area::included()->filter()->sort()->getOrPaginate();
-        return response()->json($areas);
+        $apprentices = Apprentice::included()->filter()->sort()->getOrPaginate();
+
+        return response()->json($apprentices);
     }
 
     /**
@@ -29,25 +31,23 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-         $area=area::create($request->all());
+        $apprentice = Apprentice::create($request->all());
 
-        return response()->json($area);
+        return response()->json($apprentice);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Apprentice $aprentice)
     {
-        $area = Area::find($id);
-
-        return response()->json($area);
+         return response()->json($aprentice);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Area $area)
+    public function edit(Apprentice $apprentice)
     {
         //
     }
@@ -55,7 +55,7 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Area $area)
+    public function update(Request $request, Apprentice $aprentice)
     {
         //
     }
@@ -63,10 +63,10 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Area $area)
+    public function destroy(Apprentice $apprentice)
     {
-        $area->delete();
+        $apprentice->delete();
 
-        return response()->json($area);
+        return response()->json($apprentice);
     }
 }

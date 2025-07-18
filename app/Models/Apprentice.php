@@ -6,31 +6,32 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
-class Area extends Model
+class Apprentice extends Model
 {
     use HasFactory;
-    public function course (){
-        return $this->hasOne(Course::class);
+    public function computer (){
+        return $this->belongsTo(Computer::class);
     }
-     public function teacher (){
-        return $this->hasOne(Teacher::class);
+    public function course (){
+        return $this->belongsTo(Course::class);
     }
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'email', 'cell_number','course_id', 'computer_id'];
+
         //LISTAS BLANCAS
     protected $allowIncluded = [
-        'teachers',
-        'teachers.training_center',
-        'teachers.courses',
-        'courses',
-        'courses.training_center',
-        'courses.teachers',
-        'courses.aprentices',
-        'courses.aprentices.computer',]; //las posibles Querys que se pueden realizar
-    protected $allowFilter = ['id','name'];
-    protected $allowSort = ['id','name'];
+        'computer',
+        'course',
+        'course.area',
+        'course.area.teachers',
+        'course.training_center',
+        'course.training_center.teachers',
+        'course.teachers',
+        'computer',]; //las posibles Querys que se pueden realizar
+    protected $allowFilter = ['name', 'email', 'cell_number','course_id', 'computer_id'];
+    protected $allowSort = ['name', 'email', 'cell_number','course_id', 'computer_id'];
 
-     public function scopeIncluded(Builder $query)
+      public function scopeIncluded(Builder $query)
     {
         if (empty($this->allowIncluded) || empty(request('included'))) { // validamos que la lista blanca y la variable included enviada a travez de HTTP no este en vacia.
             return;
@@ -114,4 +115,3 @@ class Area extends Model
         //http://api.codersfree1.test/v1/categories?perPage=2
     }
 }
-

@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\ApprenticeController;
 use App\Http\Controllers\TrainingcenterController;
 use App\Http\Controllers\ComputerController;
-use App\Http\Controllers\ApprenticeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TeacherController;
 use App\Models\Area;
@@ -23,14 +23,14 @@ Route::put('Areas/{Area}', [AreaController::class, 'update'])->name('Area.update
 Route::delete('Areas/{Area}', [AreaController::class, 'destroy'])->name('Area.destroy');
 Route::get('Areas/{Area}/edit', [AreaController::class, 'edit'])->name('Area.edit');
 
-//Rutas Apprendice
-Route::get('Apprendice', [ApprendiceController::class, 'index'])->name('Apprendice.index');
-Route::get('Apprendice/create', [ApprendiceController::class, 'create'])->name('Apprendice.create');
-Route::post('Apprendice/store', [ApprendiceController::class, 'store'])->name('Apprendice.store');
-Route::get('Apprendice/{Apprendice}', [ApprendiceController::class, 'show'])->name('Apprendice.show');
-Route::put('Apprendice/{Apprendice}', [ApprendiceController::class, 'update'])->name('Apprendice.update');
-Route::delete('Apprendice/{Apprendice}', [ApprendiceController::class, 'destroy'])->name('Apprendice.destroy');
-Route::get('Apprendice/{Apprendice}/edit', [ApprendiceController::class, 'edit'])->name('Apprendice.edit');
+//Rutas Aprendiz
+Route::get('Apprentice', [ApprenticeController::class, 'index'])->name('Apprentice.index');
+Route::get('Apprentice/create', [ApprenticeController::class, 'create'])->name('Apprentice.create');
+Route::post('Apprentice/store', [ApprenticeController::class, 'store'])->name('Apprentice.store');
+Route::get('Apprentice/{Apprentice}', [ApprenticeController::class, 'show'])->name('Apprentice.show');
+Route::put('Apprentice/{Apprentice}', [ApprenticeController::class, 'update'])->name('Apprentice.update');
+Route::delete('Apprentice/{Apprentice}', [ApprenticeController::class, 'destroy'])->name('Apprentice.destroy');
+Route::get('Apprentice/{Apprentice}/edit', [ApprenticeController::class, 'edit'])->name('Apprentice.edit');
 
 
 

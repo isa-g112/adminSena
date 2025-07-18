@@ -5,69 +5,69 @@ namespace App\Http\Controllers;
 use App\Models\Trainingcenter;
 use Illuminate\Http\Request;
 
-class TrainingcenterController extends Controller
+class TrainingCenterController extends Controller
 {
-    public function index(){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $trainingCenters=Trainingcenter::included()->filter()->sort()->getOrPaginate();;
 
-        $trainingcenters = Trainingcenter::all();
-
-        return view('Trainingcenter.index', compact('trainingcenters'));
-
+        return response()->json($trainingCenters);
     }
 
-    public function create() {
-
-        return view('Trainingcenter.create');
-
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
-    public function store(Request $request){
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $trainingCenter=Trainingcenter::create($request->all());
 
-        $trainingcenters = new Trainingcenter();
-
-        $trainingcenters->name=$request->name;
-
-        $trainingcenters->location=$request->location;
-
-        $trainingcenters->save();
-
-        return $trainingcenters;
-
+        return response()->json($trainingCenter);
     }
 
-
-
+    /**
+     * Display the specified resource.
+     */
     public function show($id)
     {
-        $trainingcenter = Trainingcenter::find($id);
+        $trainingCenter=Trainingcenter::find($id);
 
-        return view('Trainingcenter.show', compact('trainingcenter'));
+        return response()->json($trainingCenter);
     }
 
-     //Destroy
-     public function destroy (Trainingcenter $trainingcenter){
-
-        $trainingcenter->delete();
-
-        return redirect()->route('Trainingcenter.index');
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Trainingcenter $training_center)
+    {
+        //
     }
 
-      public function edit(Trainingcenter $trainingcenter){
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Trainingcenter $training_center)
+    {
+        //
+    }
 
-        return view('Trainingcenter.edit',compact('trainingcenter'));
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Trainingcenter $trainingCenter)
+    {
+        $trainingCenter->delete();
 
-      }
-
-     //Update
-    public function update(Request $request, Trainingcenter $trainingcenter){
-
-        $trainingcenter->name = $request->name;
-        $trainingcenter->save();
-
-        return redirect()->route('Trainingcenter.index');
-
-      }
-
-
-
+        return response()->json($trainingCenter);
+    }
 }

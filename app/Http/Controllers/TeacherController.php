@@ -2,40 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Models\Teacher;
 
-class TeacherController extends Controller
+class CourseController extends Controller
 {
-    public function show($id)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $teacher = Teacher::find($id);
+         $courses=course::included()->filter()->sort()->getOrPaginate();
 
-        return view('teacher.show', compact('teacher'));
+        return response()->json($courses);
     }
 
-     //Destroy
-     public function destroy (Teacher $teacher){
-
-        $teacher->delete();
-
-        return redirect()->route('teacher.index');
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
-      public function edit(Teacher $teacher){
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $course=course::create($request->all());
 
-        return view('teacher.edit',compact('teacher'));
+        return response()->json($course);
+    }
 
-      }
+    /**
+     * Display the specified resource.
+     */
+    public function show(Course $course)
+    {
+         return response()->json($course);
+    }
 
-     //Update
-    public function update(Request $request, Teacher $teacher){
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Course $course)
+    {
+        //
+    }
 
-        $teacher->name = $request->name;
-        $teacher->save();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Course $course)
+    {
+        //
+    }
 
-        return redirect()->route('teacher.index');
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Course $course)
+    {
+        $course->delete();
 
-      }
-
+        return response()->json($course);
+    }
 }
